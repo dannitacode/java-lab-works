@@ -1,0 +1,25 @@
+# Archivos de compilación de Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Ignorar archivos PlantUML
+*.puml
+
+# Carpetas de compilación y distribución de NetBeans/Ant
+build/
+dist/
+
+# Configuración privada de NetBeans
+nbproject/private/
+
+# Archivos de NetBeans
+*.nbattrs
+
+# Logs y temporales
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
