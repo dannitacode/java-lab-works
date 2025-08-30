@@ -37,4 +37,9 @@ public class Materia {
         this.anio = anio;
     }
     
+    @Override
+    public String toString() {
+        return this.nombre + " " + this.anio;
+    }
+    
 }

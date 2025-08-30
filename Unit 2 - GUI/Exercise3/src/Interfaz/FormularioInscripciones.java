@@ -7,6 +7,7 @@ import static Interfaz.AppPrincipal.listaAlumnos;
 import static Interfaz.AppPrincipal.listaMaterias;
 import Logica.Alumno;
 import Logica.Materia;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -86,7 +87,6 @@ public class FormularioInscripciones extends javax.swing.JInternalFrame {
         });
 
         jButtonInscribir.setText("Inscribir");
-        jButtonInscribir.setEnabled(false);
         jButtonInscribir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInscribirActionPerformed(evt);
@@ -111,12 +111,14 @@ public class FormularioInscripciones extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxEscogerAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxEscogerMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonInscribir))
-                .addContainerGap(82, Short.MAX_VALUE))
+                    .addComponent(jComboBoxEscogerMateria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonInscribir)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jComboBoxEscogerAlumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(108, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,7 +159,14 @@ public class FormularioInscripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboBoxEscogerAlumnoActionPerformed
 
     private void jButtonInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscribirActionPerformed
-        // TODO add your handling code here:
+        Alumno alumnoSelected = (Alumno) jComboBoxEscogerAlumno.getSelectedItem();
+        Materia materiaSelected = (Materia) jComboBoxEscogerMateria.getSelectedItem();
+        if (alumnoSelected == null || materiaSelected == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, complete los campos antes de continuar.");
+        } else {
+            alumnoSelected.agregarMateria(materiaSelected);
+            JOptionPane.showMessageDialog(this, "Alumno inscripto exitosamente.");
+        }
     }//GEN-LAST:event_jButtonInscribirActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed

@@ -46,7 +46,8 @@ public class Alumno {
     public void agregarMateria(Materia m) {
         if (!misMaterias.contains(m)) {
             misMaterias.add(m);
-            JOptionPane.showMessageDialog(null, "Alumno agregado.");
+        } else {
+            JOptionPane.showMessageDialog(null, "El alumno ya ha sido inscripto a esa materia.");
         }
     }
 
@@ -56,6 +57,6 @@ public class Alumno {
     
     @Override
     public String toString() {
-        return "--Alumno--" + "\nNombre: " + this.nombre + "\nApellido: " + this.apellido + "\nLegajo: " + this.legajo + "\nCantidad de materias a la que está inscrito: " + this.cantidadMaterias();
+        return this.nombre + " " + this.apellido + " " + this.legajo;
     }
 }
