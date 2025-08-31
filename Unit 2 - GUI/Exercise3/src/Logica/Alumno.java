@@ -46,6 +46,7 @@ public class Alumno {
     public void agregarMateria(Materia m) {
         if (!misMaterias.contains(m)) {
             misMaterias.add(m);
+            JOptionPane.showMessageDialog(null, "Alumno inscripto exitosamente.");
         } else {
             JOptionPane.showMessageDialog(null, "El alumno ya ha sido inscripto a esa materia.");
         }

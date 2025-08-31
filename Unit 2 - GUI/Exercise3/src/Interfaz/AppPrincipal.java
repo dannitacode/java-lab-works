@@ -36,11 +36,14 @@ public class AppPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAlumno = new javax.swing.JMenu();
         jMenuItemAgregarAlumno = new javax.swing.JMenuItem();
+        jMenuItemBorrarAlumno = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItemAgregarMateria = new javax.swing.JMenuItem();
+        jMenuItemBorrarMateria = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemInscribirAlumno = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Escritorio");
@@ -73,6 +76,14 @@ public class AppPrincipal extends javax.swing.JFrame {
         });
         jMenuAlumno.add(jMenuItemAgregarAlumno);
 
+        jMenuItemBorrarAlumno.setText("Borrar alumno");
+        jMenuItemBorrarAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBorrarAlumnoActionPerformed(evt);
+            }
+        });
+        jMenuAlumno.add(jMenuItemBorrarAlumno);
+
         jMenuBar1.add(jMenuAlumno);
 
         jMenu2.setText("Materia");
@@ -84,6 +95,14 @@ public class AppPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItemAgregarMateria);
+
+        jMenuItemBorrarMateria.setText("Borrar materia");
+        jMenuItemBorrarMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBorrarMateriaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemBorrarMateria);
 
         jMenuBar1.add(jMenu2);
 
@@ -105,6 +124,15 @@ public class AppPrincipal extends javax.swing.JFrame {
                 jMenu4ActionPerformed(evt);
             }
         });
+
+        jMenuItem1.setText("Salir del programa");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem1);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -148,7 +176,7 @@ public class AppPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAgregarMateriaActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-        System.exit(0);
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenu4ActionPerformed
 
     private void jMenuItemInscribirAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInscribirAlumnoActionPerformed
@@ -159,6 +187,28 @@ public class AppPrincipal extends javax.swing.JFrame {
         escritorio.add(vI);
         escritorio.moveToFront(vI);
     }//GEN-LAST:event_jMenuItemInscribirAlumnoActionPerformed
+
+    private void jMenuItemBorrarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBorrarAlumnoActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        FormularioAlumnosBorrar vAB = new FormularioAlumnosBorrar();
+        vAB.setVisible(true);
+        escritorio.add(vAB);
+        escritorio.moveToFront(vAB);
+    }//GEN-LAST:event_jMenuItemBorrarAlumnoActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItemBorrarMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBorrarMateriaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        FormularioMateriasBorrar vMB = new FormularioMateriasBorrar();
+        vMB.setVisible(true);
+        escritorio.add(vMB);
+        escritorio.moveToFront(vMB);
+    }//GEN-LAST:event_jMenuItemBorrarMateriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,8 +255,11 @@ public class AppPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenuAlumno;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemAgregarAlumno;
     private javax.swing.JMenuItem jMenuItemAgregarMateria;
+    private javax.swing.JMenuItem jMenuItemBorrarAlumno;
+    private javax.swing.JMenuItem jMenuItemBorrarMateria;
     private javax.swing.JMenuItem jMenuItemInscribirAlumno;
     // End of variables declaration//GEN-END:variables
 }

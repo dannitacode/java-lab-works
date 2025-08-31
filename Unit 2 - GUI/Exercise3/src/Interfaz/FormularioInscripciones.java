@@ -165,7 +165,6 @@ public class FormularioInscripciones extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Por favor, complete los campos antes de continuar.");
         } else {
             alumnoSelected.agregarMateria(materiaSelected);
-            JOptionPane.showMessageDialog(this, "Alumno inscripto exitosamente.");
         }
     }//GEN-LAST:event_jButtonInscribirActionPerformed
 
