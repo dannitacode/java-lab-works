@@ -97,8 +97,9 @@ public class JIFAgregarCiudad extends javax.swing.JInternalFrame {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         String regex = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$";
-        if (!jTextFieldCiudad.getText().matches(regex) || jTextFieldCiudad.getText().trim().isEmpty()) {
+        if (!jTextFieldCiudad.getText().matches(regex) || jTextFieldCiudad.getText().isBlank()) {
             JOptionPane.showMessageDialog(this, "Ingrese una ciudad valida.");
+            jTextFieldCiudad.setText(null);
         } else {
             listaCiudades.add(jTextFieldCiudad.getText());
             JOptionPane.showMessageDialog(this, "Ciudad agregada.");

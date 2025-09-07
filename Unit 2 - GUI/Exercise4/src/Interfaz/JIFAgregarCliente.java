@@ -214,17 +214,12 @@ public class JIFAgregarCliente extends javax.swing.JInternalFrame {
         if (jTextFieldDNI.getText().isBlank() || jTextFieldNombre.getText().isBlank() || jTextFieldApellido.getText().isBlank() || jTextFieldDomicilio.getText().isBlank() || jTextFieldTelefono.getText().isBlank() || jComboBoxCiudades.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "Por favor, asegurese de rellenar todos los campos.");
         }
-        if (jTextFieldDNI.getText().matches(regex)) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un DNI valido.");
-            jTextFieldDNI.setText(null);
-        }
+        
         if (!jTextFieldNombre.getText().matches(regex) || !jTextFieldApellido.getText().matches(regex)) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un nombre y/o apellido valido/s.");
-            jTextFieldNombre.setText(null);
-            jTextFieldApellido.setText(null);
         }
         try {
-            directorio.agregarContacto(Long.valueOf(jTextFieldTelefono.getText()), new Contacto(jTextFieldDNI.getText(), jTextFieldNombre.getText(), jTextFieldApellido.getText(), jComboBoxCiudades.getSelectedItem().toString(), jTextFieldDomicilio.getText()));
+            directorio.agregarContacto(Long.valueOf(jTextFieldTelefono.getText()), new Contacto(Integer.parseInt(jTextFieldDNI.getText()), jTextFieldNombre.getText(), jTextFieldApellido.getText(), jComboBoxCiudades.getSelectedItem().toString(), jTextFieldDomicilio.getText()));
             JOptionPane.showMessageDialog(this, "Cliente agregado al directorio telefonico.");
             jTextFieldDNI.setText(null);
             jTextFieldNombre.setText(null);
@@ -233,8 +228,7 @@ public class JIFAgregarCliente extends javax.swing.JInternalFrame {
             jTextFieldDomicilio.setText(null);
             jTextFieldTelefono.setText(null);
         } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese datos validos en el campo de telefono.");
-            jTextFieldTelefono.setText(null);
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese datos validos en el campo de telefono y/o DNI.");
         }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
