@@ -38,6 +38,7 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         jMenuItemBuscarCliente = new javax.swing.JMenuItem();
         jMenuItemBorrarCliente = new javax.swing.JMenuItem();
         jMenuDirectorio = new javax.swing.JMenu();
+        jMenuItemClientesCiudad = new javax.swing.JMenuItem();
         jMenuCiudades = new javax.swing.JMenu();
         jMenuItemAgregarCiudad = new javax.swing.JMenuItem();
         jMenuSalir = new javax.swing.JMenu();
@@ -85,6 +86,15 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenuClientes);
 
         jMenuDirectorio.setText("Directorio");
+
+        jMenuItemClientesCiudad.setText("Buscar clientes por ciudad");
+        jMenuItemClientesCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemClientesCiudadActionPerformed(evt);
+            }
+        });
+        jMenuDirectorio.add(jMenuItemClientesCiudad);
+
         jMenuBar1.add(jMenuDirectorio);
 
         jMenuCiudades.setText("Ciudades");
@@ -165,6 +175,15 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         JDPMenuPrincipal.add(vBorrarCliente);
         vBorrarCliente.toFront();
     }//GEN-LAST:event_jMenuItemBorrarClienteActionPerformed
+
+    private void jMenuItemClientesCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClientesCiudadActionPerformed
+        JDPMenuPrincipal.removeAll();
+        JDPMenuPrincipal.repaint();
+        JIFBuscarClienteCiudad vBuscarCC = new JIFBuscarClienteCiudad();
+        vBuscarCC.setVisible(true);
+        JDPMenuPrincipal.add(vBuscarCC);
+        vBuscarCC.toFront();
+    }//GEN-LAST:event_jMenuItemClientesCiudadActionPerformed
     
     
     
@@ -214,6 +233,7 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemAgregarCliente;
     private javax.swing.JMenuItem jMenuItemBorrarCliente;
     private javax.swing.JMenuItem jMenuItemBuscarCliente;
+    private javax.swing.JMenuItem jMenuItemClientesCiudad;
     private javax.swing.JMenu jMenuSalir;
     // End of variables declaration//GEN-END:variables
 }
