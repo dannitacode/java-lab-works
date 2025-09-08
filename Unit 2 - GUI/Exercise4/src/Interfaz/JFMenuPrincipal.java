@@ -36,6 +36,7 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         jMenuClientes = new javax.swing.JMenu();
         jMenuItemAgregarCliente = new javax.swing.JMenuItem();
         jMenuItemBuscarCliente = new javax.swing.JMenuItem();
+        jMenuItemBorrarCliente = new javax.swing.JMenuItem();
         jMenuDirectorio = new javax.swing.JMenu();
         jMenuCiudades = new javax.swing.JMenu();
         jMenuItemAgregarCiudad = new javax.swing.JMenuItem();
@@ -48,7 +49,7 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         JDPMenuPrincipal.setLayout(JDPMenuPrincipalLayout);
         JDPMenuPrincipalLayout.setHorizontalGroup(
             JDPMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 611, Short.MAX_VALUE)
+            .addGap(0, 829, Short.MAX_VALUE)
         );
         JDPMenuPrincipalLayout.setVerticalGroup(
             JDPMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,6 +73,14 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuClientes.add(jMenuItemBuscarCliente);
+
+        jMenuItemBorrarCliente.setText("Borrar cliente");
+        jMenuItemBorrarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBorrarClienteActionPerformed(evt);
+            }
+        });
+        jMenuClientes.add(jMenuItemBorrarCliente);
 
         jMenuBar1.add(jMenuClientes);
 
@@ -147,6 +156,15 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         JDPMenuPrincipal.add(vBuscarCliente);
         vBuscarCliente.toFront();
     }//GEN-LAST:event_jMenuItemBuscarClienteActionPerformed
+
+    private void jMenuItemBorrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBorrarClienteActionPerformed
+        JDPMenuPrincipal.removeAll();
+        JDPMenuPrincipal.repaint();
+        JIFBorrarCliente vBorrarCliente = new JIFBorrarCliente();
+        vBorrarCliente.setVisible(true);
+        JDPMenuPrincipal.add(vBorrarCliente);
+        vBorrarCliente.toFront();
+    }//GEN-LAST:event_jMenuItemBorrarClienteActionPerformed
     
     
     
@@ -194,6 +212,7 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuDirectorio;
     private javax.swing.JMenuItem jMenuItemAgregarCiudad;
     private javax.swing.JMenuItem jMenuItemAgregarCliente;
+    private javax.swing.JMenuItem jMenuItemBorrarCliente;
     private javax.swing.JMenuItem jMenuItemBuscarCliente;
     private javax.swing.JMenu jMenuSalir;
     // End of variables declaration//GEN-END:variables
