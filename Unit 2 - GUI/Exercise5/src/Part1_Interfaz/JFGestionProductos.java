@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * @author dannita
  */
 public class JFGestionProductos extends javax.swing.JFrame {
+
     private List<Producto> limpieza;
     private List<Producto> farmacia;
     private List<Producto> electronica;
@@ -24,6 +25,7 @@ public class JFGestionProductos extends javax.swing.JFrame {
             return false;
         }
     };
+
     /**
      * Creates new form JFGestionProductos
      */
@@ -35,7 +37,7 @@ public class JFGestionProductos extends javax.swing.JFrame {
         this.electronica = new ArrayList<>();
         columns();
     }
-    
+
     private void agregarItems() {
         jComboBoxCategorias.addItem("Seleccione una categoria...");
         jComboBoxCategorias.addItem("Limpieza");
@@ -212,43 +214,52 @@ public class JFGestionProductos extends javax.swing.JFrame {
         String regex = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$";
         if (jComboBoxCategorias.getSelectedIndex() == -1 || jComboBoxCategorias.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione una categoria");
+            return;
         }
-        if (!jTextFieldNombre.getText().matches(regex) || jTextFieldPrecio.getText().matches(regex) || jTextFieldNombre.getText().isBlank() || jTextFieldPrecio.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese datos validos en los campos de nombre y/o precio.");
-        }
-        
-        String categoria = jComboBoxCategorias.getSelectedItem().toString();
-        Producto producto = new Producto(jTextFieldNombre.getText(), Double.parseDouble(jTextFieldPrecio.getText()));
-        
-        switch (categoria) {
-            case "Limpieza": limpieza.add(producto);
-            break;
-            case "Farmarcia": farmacia.add(producto);
-            break;
-            case "Electronica": electronica.add(producto);
-            break;
-        }
+        try {
+            if (!jTextFieldNombre.getText().matches(regex) || jTextFieldNombre.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese datos validos en el campo del nombre del producto.");
+                return;
+            }
+
+            String categoria = jComboBoxCategorias.getSelectedItem().toString();
+            Producto producto = new Producto(jTextFieldNombre.getText(), Double.parseDouble(jTextFieldPrecio.getText()));
+
+            switch (categoria) {
+                case "Limpieza":
+                    limpieza.add(producto);
+                    break;
+                case "Farmarcia":
+                    farmacia.add(producto);
+                    break;
+                case "Electronica":
+                    electronica.add(producto);
+                    break;
+            }
             rows(producto, categoria);
             JOptionPane.showMessageDialog(this, "Producto agregado.");
             jTextFieldNombre.setText(null);
             jTextFieldPrecio.setText(null);
             jComboBoxCategorias.setSelectedIndex(0);
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese datos validos en el campo del precio del producto.");
+        }
     }//GEN-LAST:event_jButtonAgregarActionPerformed
-    
+
     private void columns() {
         modeloTabla.addColumn("Nombre");
         modeloTabla.addColumn("Categoria");
         modeloTabla.addColumn("Precio");
         jTablaContenido.setModel(modeloTabla);
     }
-    
+
     private void rows(Producto p, String categoria) {
         Object[] fila = {
             p.getNombre(), categoria, p.getPrecio()
         };
         modeloTabla.addRow(fila);
     }
-    
+
     /**
      * @param args the command line arguments
      */
