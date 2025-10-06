@@ -23,6 +23,10 @@ nbproject/private/
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+config.properties
+
 /Unit 2 - GUI/Exercise1/nbproject/private/
 /Unit 2 - GUI/Exercise4/nbproject/private/
 /Unit 2 - GUI/Exercise5/nbproject/private/
+/Exercise1/nbproject/private/
