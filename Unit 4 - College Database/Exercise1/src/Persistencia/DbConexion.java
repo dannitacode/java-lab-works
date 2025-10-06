@@ -30,11 +30,6 @@ public class DbConexion {
 
         return conn;
     }
-
-    // Método de prueba
-    public static void main(String[] args) {
-        establecerConexion();
-    }
 }
 
 
