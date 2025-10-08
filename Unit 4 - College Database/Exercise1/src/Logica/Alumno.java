@@ -1,6 +1,6 @@
 package Logica;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 
 /**
@@ -12,15 +12,15 @@ public class Alumno {
     private int dni;
     private String nombre;
     private String apellido;
-    private LocalDate fechaNacimiento;
+    private Date fechaNacimiento;
     private boolean estado;
 
-    public Alumno(int dni, String nombre, String apellido, LocalDate fechaNacimiento, boolean estado) {
+    public Alumno(int dni, String nombre, String apellido, Date fechaNacimiento) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
-        this.estado = estado;
+        this.estado = false;
     }
 
     public int getIdAlumno() {
@@ -55,15 +55,15 @@ public class Alumno {
         this.apellido = apellido;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public boolean getEstado() {
+    public boolean isEstado() {
         return estado;
     }
 
