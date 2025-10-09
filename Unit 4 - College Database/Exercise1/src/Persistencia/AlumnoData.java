@@ -146,60 +146,66 @@ public class AlumnoData {
 //        return alumno;
 //    }
 //
-//    public void bajaLogica(int dni) {
-//        Connection conexion = null;
-//        try {
-//            conexion = DbConexion.establecerConexion();
-//            String query = "UPDATE alumno SET estado=0 WHERE dni=?";
-//            PreparedStatement ps = conexion.prepareStatement(query);
-//            ps.setInt(1, dni);
-//            int filas = ps.executeUpdate();
-//            if (filas > 0) {
-//                System.out.println("Alumno dado de baja exitosamente");
-//            } else {
-//                System.out.println("No existe un alumno con ese DNI.");
-//            }
-//        } catch (SQLException s) {
-//            System.out.println("No se pudo procesar la consulta.");
-//            s.printStackTrace();
-//        } finally {
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException s) {
-//                    s.printStackTrace();
-//                }
-//            }
-//        }
-//    }
-//
-//    public void altaLogica(int dni) {
-//        Connection conexion = null;
-//        try {
-//            conexion = DbConexion.establecerConexion();
-//            String query = "UPDATE alumno SET estado=1 WHERE dni=?";
-//            PreparedStatement ps = conexion.prepareStatement(query);
-//            ps.setInt(1, dni);
-//            int filas = ps.executeUpdate();
-//            if (filas > 0) {
-//                System.out.println("Alumno dado de alta exitosamente");
-//            } else {
-//                System.out.println("No existe un alumno con ese DNI.");
-//            }
-//        } catch (SQLException s) {
-//            System.out.println("No se pudo procesar la consulta.");
-//            s.printStackTrace();
-//        } finally {
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException s) {
-//                    s.printStackTrace();
-//                }
-//            }
-//        }
-//    }
-//
+    public boolean bajaLogica(int id) {
+        Connection conexion = null;
+        try {
+            conexion = DbConexion.establecerConexion();
+            String query = "UPDATE alumno SET estado=0 WHERE id_alumno=?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setInt(1, id);
+            int filas = ps.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Alumno dado de baja exitosamente");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe un alumno con ese ID.");
+                return false;
+            }
+        } catch (SQLException s) {
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la consulta.");
+            s.printStackTrace();
+            return false;
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException s) {
+                    s.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public boolean altaLogica(int id) {
+        Connection conexion = null;
+        try {
+            conexion = DbConexion.establecerConexion();
+            String query = "UPDATE alumno SET estado=1 WHERE id_alumno=?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setInt(1, id);
+            int filas = ps.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Alumno dado de alta exitosamente");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe un alumno con ese ID.");
+                return false;
+            }
+        } catch (SQLException s) {
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la consulta.");
+            s.printStackTrace();
+            return false;
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException s) {
+                    s.printStackTrace();
+                }
+            }
+        }
+    }
+
     public boolean borrarAlumno(int id) {
         Connection conexion = null;
         try {
