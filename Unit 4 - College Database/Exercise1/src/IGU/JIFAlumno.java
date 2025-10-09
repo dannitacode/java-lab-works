@@ -9,8 +9,11 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 import Logica.Alumno;
 import static IGU.JFrameMain.DbAlumno;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import javax.swing.JDesktopPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,12 +24,22 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
     private boolean aux = false;
     private String regex = "[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$";
     private String regex2 = "\\d+";
+    private DefaultTableModel modeloTabla = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    
+    
 
     /**
      * Creates new form JInternalFrameAlumno
      */
     public JIFAlumno() {
         initComponents();
+        columns();
+        rows();
         jDateChooserFN.setDateFormatString("yyyy/MM/dd");
         ((javax.swing.JTextField) jDateChooserFN.getDateEditor().getUiComponent()).setEditable(false);
         Calendar calendar = Calendar.getInstance();
@@ -70,9 +83,16 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldIDAlumno = new javax.swing.JTextField();
+        jButtonActualizarLista = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("Gestión de alumnos");
+
+        jTextFieldBuscarPorDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldBuscarPorDNIKeyReleased(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jLabel6.setText("Buscar alumno por DNI:");
@@ -207,6 +227,13 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
                 .addGap(15, 15, 15))
         );
 
+        jButtonActualizarLista.setText("Actualizar lista");
+        jButtonActualizarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarListaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,9 +258,11 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
                             .addComponent(jButtonBorrar)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldBuscarPorDNI))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldBuscarPorDNI))
+                            .addComponent(jButtonActualizarLista))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -263,7 +292,9 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldBuscarPorDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldBuscarPorDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonActualizarLista))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
         );
@@ -459,6 +490,14 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonBajaActionPerformed
 
+    private void jTextFieldBuscarPorDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscarPorDNIKeyReleased
+        rows();
+    }//GEN-LAST:event_jTextFieldBuscarPorDNIKeyReleased
+
+    private void jButtonActualizarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarListaActionPerformed
+        rows();
+    }//GEN-LAST:event_jButtonActualizarListaActionPerformed
+
     private void deshabilitarCampos() {
         jTextFieldIDAlumno.setEnabled(false);
         jTextFieldNombre.setEnabled(false);
@@ -497,9 +536,41 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
         jTextFieldDNI.setText("");
         jDateChooserFN.setDate(null);
     }
+    
+    private void columns() {
+        modeloTabla.addColumn("ID Alumno");
+        modeloTabla.addColumn("DNI");
+        modeloTabla.addColumn("Apellido");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Fecha de nacimiento");
+        modeloTabla.addColumn("Estado");
+        jTableAlumnos.setModel(modeloTabla);
+    }
+    
+    private void rows() {
+        String dni = jTextFieldBuscarPorDNI.getText();
+        if (!dni.matches(regex2) && !dni.isBlank()) {
+            JOptionPane.showMessageDialog(this, "No ingrese letras en el DNI.");
+            jTextFieldBuscarPorDNI.setText("");
+            return;
+        }
+        modeloTabla.setRowCount(0);
+        List<Alumno> listaAlumnos = new ArrayList<>();
+        listaAlumnos = DbAlumno.mostrarAlumnos();
+        for (Alumno lista : listaAlumnos) {
+            String aux = String.valueOf(lista.getDni());
+            if (dni.isBlank() || aux.contains(dni)) {
+                Object[] filas = {
+                    lista.getIdAlumno(), lista.getDni(), lista.getApellido(), lista.getNombre(), lista.getFechaNacimiento(), (lista.isEstado() ? "Activo" : "Inactivo")
+                };
+                modeloTabla.addRow(filas);
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JButton jButtonActualizarLista;
     private javax.swing.JButton jButtonAlta;
     private javax.swing.JButton jButtonBaja;
     private javax.swing.JButton jButtonBorrar;

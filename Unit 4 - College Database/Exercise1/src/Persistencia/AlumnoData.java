@@ -3,6 +3,8 @@ package Persistencia;
 import java.sql.*;
 import java.util.Date;
 import Logica.Alumno;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,38 +43,40 @@ public class AlumnoData {
         }
     }
 
-//    public void mostrarAlumnos() {
-//        Connection conexion = null;
-//        try {
-//            conexion = DbConexion.establecerConexion();
-//            String query = "SELECT * FROM alumno";
-//            PreparedStatement ps = conexion.prepareStatement(query);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                Alumno alumno = new Alumno(
-//                        rs.getInt("dni"),
-//                        rs.getString("apellido"),
-//                        rs.getString("nombre"),
-//                        rs.getDate("fecha_nacimiento")
-//                );
-//                alumno.setEstado(rs.getBoolean("estado"));
-//                alumno.setIdAlumno(rs.getInt("id_alumno"));
-//                System.out.println("Id alumno: " + alumno.getIdAlumno() + "\nDNI: " + alumno.getDni() + "\nNombre: " + alumno.getNombre() + "\nApellido: " + alumno.getApellido() + "\nFecha de nacimiento: " + alumno.getFechaNacimiento() + "\nEstado: " + (alumno.isEstado() ? "Activo" : "Inactivo"));
-//            }
-//        } catch (SQLException s) {
-//            System.out.println("Error: No se pudo procesar la consulta.");
-//            s.printStackTrace();
-//        } finally {
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException s) {
-//                    s.printStackTrace();
-//                }
-//            }
-//        }
-//    }
-//
+    public List<Alumno> mostrarAlumnos() {
+        Connection conexion = null;
+        List<Alumno> listaAlumnos = new ArrayList<>();
+        try {
+            conexion = DbConexion.establecerConexion();
+            String query = "SELECT * FROM alumno";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Alumno alumno = new Alumno(
+                        rs.getInt("dni"),
+                        rs.getString("apellido"),
+                        rs.getString("nombre"),
+                        rs.getDate("fecha_nacimiento")
+                );
+                alumno.setEstado(rs.getBoolean("estado"));
+                alumno.setIdAlumno(rs.getInt("id_alumno"));
+                listaAlumnos.add(alumno);
+            }
+        } catch (SQLException s) {
+            System.out.println("Error: No se pudo procesar la consulta.");
+            s.printStackTrace();
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException s) {
+                    s.printStackTrace();
+                }
+            }
+        }
+        return listaAlumnos;
+    }
+
     public boolean actualizarAlumno(int dni, String nombre, String apellido, Date fechaNac, int referencia) {
         Connection conexion = null;
         try {
