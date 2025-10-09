@@ -111,45 +111,7 @@ public class AlumnoData {
             }
         }
     }
-//
-//    public Alumno buscarAlumno(int dni) {
-//        Connection conexion = null;
-//        Alumno alumno = null;
-//        try {
-//            conexion = DbConexion.establecerConexion();
-//            String query = "SELECT * FROM alumno WHERE dni=?";
-//            PreparedStatement ps = conexion.prepareStatement(query);
-//            ps.setInt(1, dni);
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next()) {
-//                alumno = new Alumno(
-//                        rs.getInt("dni"),
-//                        rs.getString("apellido"),
-//                        rs.getString("nombre"),
-//                        rs.getDate("fecha_nacimiento").toLocalDate(),
-//                        rs.getBoolean("estado")
-//                );
-//                alumno.setIdAlumno(rs.getInt("id_alumno"));
-//                System.out.println("Alumno encontrado.");
-////                System.out.println("Id alumno: " + alumno.getIdAlumno() + "\nDNI: " + alumno.getDni() + "\nNombre: " + alumno.getNombre() + "\nApellido: " + alumno.getApellido() + "\nFecha de nacimiento: " + alumno.getFechaNacimiento() + "\nEstado: " + (alumno.isEstado() ? "Activo" : "Inactivo"));
-//            } else {
-//                System.out.println("El alumno con ese DNI no fue encontrado.");
-//            }
-//        } catch (SQLException s) {
-//            System.out.println("Error: No se pudo realizar la consulta.");
-//            s.printStackTrace();
-//        } finally {
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException s) {
-//                    s.printStackTrace();
-//                }
-//            }
-//        }
-//        return alumno;
-//    }
-//
+    
     public boolean bajaLogica(int id) {
         Connection conexion = null;
         try {
