@@ -68,6 +68,8 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
         jTextFieldApellido = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextFieldIDAlumno = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("Gestión de alumnos");
@@ -107,6 +109,11 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
 
         jButtonBorrar.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jButtonBorrar.setText("Borrar");
+        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarActionPerformed(evt);
+            }
+        });
 
         jButtonAlta.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jButtonAlta.setText("Alta");
@@ -136,6 +143,10 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jLabel5.setText("Fecha de nacimiento:");
 
+        jLabel7.setText("Id:");
+
+        jTextFieldIDAlumno.setEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -145,22 +156,29 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
+                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(1, 1, 1))
-                    .addComponent(jLabel2))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel4))
+                        .addGap(1, 1, 1)))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextFieldNombre)
                     .addComponent(jTextFieldApellido)
-                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooserFN, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                    .addComponent(jDateChooserFN, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldIDAlumno))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldIDAlumno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -176,7 +194,7 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jDateChooserFN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -184,33 +202,35 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(187, 187, 187))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldBuscarPorDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(179, 179, 179))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))))
+                .addContainerGap(186, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(187, 187, 187))
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonInsertar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonActualizar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonBorrar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonAlta)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonBaja)))
+                        .addGap(58, 58, 58)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldBuscarPorDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(161, 161, 161))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jButtonInsertar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonActualizar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonBorrar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonAlta)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonBaja)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -220,7 +240,7 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonInsertar)
                     .addComponent(jButtonActualizar)
@@ -233,7 +253,7 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
                     .addComponent(jTextFieldBuscarPorDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -331,7 +351,40 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
+    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
+        if (aux == false) {
+            deshabilitarBotones();
+            jButtonBorrar.setEnabled(true);
+            deshabilitarCampos();
+            jTextFieldIDAlumno.setEnabled(true);
+            aux = true;
+            return;
+        }
+        if (aux == true) {
+            boolean res = false;
+            if (!jTextFieldIDAlumno.getText().matches(regex2) || jTextFieldIDAlumno.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Asegurese de ingresar datos correctos en el campo del id del alumno");
+                jTextFieldIDAlumno.setText("");
+                return;
+            }
+            try {
+                res = DbAlumno.borrarAlumno(Integer.parseInt(jTextFieldIDAlumno.getText()));
+            } catch (NumberFormatException nfe) {
+                nfe.printStackTrace();
+            }
+            if (res == true) {
+                aux = false;
+                limpiarCampos();
+                deshabilitarCampos();
+                habilitarBotones();
+            } else {
+                jTextFieldIDAlumno.setText("");
+            }
+        }
+    }//GEN-LAST:event_jButtonBorrarActionPerformed
+
     private void deshabilitarCampos() {
+        jTextFieldIDAlumno.setEnabled(false);
         jTextFieldNombre.setEnabled(false);
         jTextFieldApellido.setEnabled(false);
         jTextFieldDNI.setEnabled(false);
@@ -362,6 +415,7 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
     }
 
     private void limpiarCampos() {
+        jTextFieldIDAlumno.setText("");
         jTextFieldNombre.setText("");
         jTextFieldApellido.setText("");
         jTextFieldDNI.setText("");
@@ -381,12 +435,14 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAlumnos;
     private javax.swing.JTextField jTextFieldApellido;
     private javax.swing.JTextField jTextFieldBuscarPorDNI;
     private javax.swing.JTextField jTextFieldDNI;
+    private javax.swing.JTextField jTextFieldIDAlumno;
     private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
 

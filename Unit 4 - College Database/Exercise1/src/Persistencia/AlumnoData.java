@@ -200,30 +200,33 @@ public class AlumnoData {
 //        }
 //    }
 //
-//    public void borrarAlumno(int id) {
-//        Connection conexion = null;
-//        try {
-//            conexion = DbConexion.establecerConexion();
-//            String query = "DELETE FROM alumno WHERE id_alumno = ?";
-//            PreparedStatement ps = conexion.prepareStatement(query);
-//            ps.setInt(1, id);
-//            int filas = ps.executeUpdate();
-//            if (filas > 0) {
-//                System.out.println("Alumno borrado exitosamente.");
-//            } else {
-//                System.out.println("No se encontró un alumno con ese ID.");
-//            }
-//        } catch (SQLException s) {
-//            System.out.println("No se pudo procesar la consulta.");
-//            s.printStackTrace();
-//        } finally {
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException s) {
-//                    s.printStackTrace();
-//                }
-//            }
-//        }
-//    }
+    public boolean borrarAlumno(int id) {
+        Connection conexion = null;
+        try {
+            conexion = DbConexion.establecerConexion();
+            String query = "DELETE FROM alumno WHERE id_alumno = ?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setInt(1, id);
+            int filas = ps.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Alumno borrado exitosamente.");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró un alumno con ese ID.");
+                return false;
+            }
+        } catch (SQLException s) {
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la consulta.");
+            s.printStackTrace();
+            return false;
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException s) {
+                    s.printStackTrace();
+                }
+            }
+        }
+    }
 }
