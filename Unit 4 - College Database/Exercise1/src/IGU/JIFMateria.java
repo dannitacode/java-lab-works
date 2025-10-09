@@ -24,21 +24,248 @@ public class JIFMateria extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextFieldIDMateria = new javax.swing.JTextField();
+        jYearChooserAño = new com.toedter.calendar.JYearChooser();
+        jButtonCargar = new javax.swing.JButton();
+        jButtonActualizar = new javax.swing.JButton();
+        jButtonBorrar = new javax.swing.JButton();
+        jButtonAlta = new javax.swing.JButton();
+        jButtonBaja = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableMaterias = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldBuscarPorAño = new javax.swing.JTextField();
+        jButtonActualizarLista = new javax.swing.JButton();
+
+        setClosable(true);
+
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        jLabel1.setText("Gestión de materias");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Ingreso de datos:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Ubuntu", 0, 14))); // NOI18N
+
+        jTextFieldNombre.setEnabled(false);
+
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        jLabel4.setText("Nombre:");
+
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        jLabel5.setText("Año:");
+
+        jLabel7.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        jLabel7.setText("Id:");
+
+        jTextFieldIDMateria.setEnabled(false);
+
+        jYearChooserAño.setEnabled(false);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldIDMateria, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                    .addComponent(jTextFieldNombre)
+                    .addComponent(jYearChooserAño, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldIDMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jYearChooserAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(76, 76, 76))
+        );
+
+        jButtonCargar.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
+        jButtonCargar.setText("Cargar materia");
+
+        jButtonActualizar.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
+        jButtonActualizar.setText("Actualizar materia");
+
+        jButtonBorrar.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
+        jButtonBorrar.setText("Borrar materia");
+
+        jButtonAlta.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
+        jButtonAlta.setText("Habilitar materia");
+
+        jButtonBaja.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
+        jButtonBaja.setText("Inhabilitar materia");
+
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setEnabled(false);
+
+        jTableMaterias.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
+        jTableMaterias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableMaterias);
+
+        jLabel6.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        jLabel6.setText("Buscar materia por año:");
+
+        jButtonActualizarLista.setText("Actualizar lista");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(208, 208, 208))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldBuscarPorAño, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonActualizarLista))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jButtonAlta)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonBaja)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonCancelar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonCargar)
+                            .addComponent(jButtonActualizar)
+                            .addComponent(jButtonBorrar))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jButtonCargar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonActualizar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonBorrar)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonAlta)
+                            .addComponent(jButtonBaja)
+                            .addComponent(jButtonCancelar))
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(35, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldBuscarPorAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonActualizarLista)
+                        .addGap(113, 113, 113))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void deshabilitarCampos() {
+        jTextFieldIDMateria.setEnabled(false);
+        jTextFieldNombre.setEnabled(false);
+        jYearChooserAño.setEnabled(false);
+    }
+
+    private void deshabilitarBotones() {
+        jButtonCargar.setEnabled(false);
+        jButtonActualizar.setEnabled(false);
+        jButtonBorrar.setEnabled(false);
+        jButtonAlta.setEnabled(false);
+        jButtonBaja.setEnabled(false);
+    }
+
+    private void habilitarCampos() {
+        jTextFieldNombre.setEnabled(true);
+        jYearChooserAño.setEnabled(true);
+    }
+
+    private void habilitarBotones() {
+        jButtonCargar.setEnabled(true);
+        jButtonActualizar.setEnabled(true);
+        jButtonBorrar.setEnabled(true);
+        jButtonAlta.setEnabled(true);
+        jButtonBaja.setEnabled(true);
+    }
+
+    private void limpiarCampos() {
+        jTextFieldNombre.setText("");
+        jTextFieldIDMateria.setText("");
+        jYearChooserAño.setYear(2025);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JButton jButtonActualizarLista;
+    private javax.swing.JButton jButtonAlta;
+    private javax.swing.JButton jButtonBaja;
+    private javax.swing.JButton jButtonBorrar;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonCargar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableMaterias;
+    private javax.swing.JTextField jTextFieldBuscarPorAño;
+    private javax.swing.JTextField jTextFieldIDMateria;
+    private javax.swing.JTextField jTextFieldNombre;
+    private com.toedter.calendar.JYearChooser jYearChooserAño;
     // End of variables declaration//GEN-END:variables
 }
