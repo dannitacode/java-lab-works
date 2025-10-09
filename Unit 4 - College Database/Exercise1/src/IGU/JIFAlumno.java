@@ -86,6 +86,8 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
         jButtonActualizarLista = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
 
+        setClosable(true);
+
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("Gestión de alumnos");
 
@@ -292,16 +294,15 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonAlta)
                             .addComponent(jButtonBaja)
-                            .addComponent(jButtonCancelar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE))
+                            .addComponent(jButtonCancelar)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jButtonInsertar)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonActualizar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonBorrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButtonBorrar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -600,7 +601,7 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
                 }
             }
         } catch (NullPointerException npe) {
-            System.out.println("No se pudo obtener la lista. Se encuentra vacía o no existe una conexion establecida a una base de datos. Establezca la conexion primero, luego continue.");
+            JOptionPane.showMessageDialog(this, "No existe una conexion establecida a una base de datos. \nEstablezca la conexion primero, luego continue.");
             npe.getMessage();
             jTextFieldBuscarPorDNI.setEnabled(false);
             jButtonActualizarLista.setEnabled(false);
