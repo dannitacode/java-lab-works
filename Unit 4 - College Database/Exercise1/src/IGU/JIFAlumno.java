@@ -20,6 +20,7 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
 
     private boolean aux = false;
     private String regex = "[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$";
+    private String regex2 = "\\d+";
 
     /**
      * Creates new form JInternalFrameAlumno
@@ -247,19 +248,18 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
             return;
         }
         if (aux == true) {
-            regex = "[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$";
             try {
                 if (!jTextFieldNombre.getText().matches(regex) || jTextFieldNombre.getText().isBlank()) {
-                    JOptionPane.showMessageDialog(this, "Asegúrese de ingresar datos correctos en el campo de 'Nombre'.");
+                    JOptionPane.showMessageDialog(this, "Asegurese de ingresar datos correctos en el campo de 'Nombre'.");
                     return;
                 } else if (!jTextFieldApellido.getText().matches(regex) || jTextFieldApellido.getText().isBlank()) {
-                    JOptionPane.showMessageDialog(this, "Asegúrese de ingresar datos correctos en el campo de 'Apellido'.");
+                    JOptionPane.showMessageDialog(this, "Asegurese de ingresar datos correctos en el campo de 'Apellido'.");
                     return;
-                } else if (jTextFieldDNI.getText().matches(regex) || jTextFieldDNI.getText().isBlank()) {
-                    JOptionPane.showMessageDialog(this, "Asegúrese de ingresar datos correctos en el campo de 'DNI'.");
+                } else if (!jTextFieldDNI.getText().matches(regex2) || jTextFieldDNI.getText().isBlank()) {
+                    JOptionPane.showMessageDialog(this, "Asegurese de ingresar datos correctos en el campo de 'DNI'.");
                     return;
                 } else if (jDateChooserFN.getDate() == null) {
-                    JOptionPane.showMessageDialog(this, "Asegúrese escoger una fecha para el campo de 'Fecha de nacimiento'.");
+                    JOptionPane.showMessageDialog(this, "Asegurese escoger una fecha para el campo de 'Fecha de nacimiento'.");
                     return;
                 }
                 DbAlumno.ingresarAlumno(new Alumno(Integer.parseInt(jTextFieldDNI.getText()), jTextFieldNombre.getText(), jTextFieldApellido.getText(), jDateChooserFN.getDate()));
@@ -280,57 +280,46 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
         if (aux == false) {
             habilitarCampos();
             deshabilitarBotones();
-            jButtonInsertar.setEnabled(false);
             jButtonActualizar.setEnabled(true);
             aux = true;
-            JOptionPane.showMessageDialog(this, "Debe ingresar todos los datos que se someterán a actualización del alumno");
+            JOptionPane.showMessageDialog(this, "Debe ingresar todos los datos que se someteran a actualizacion del alumno");
             return;
         }
         if (aux == true) {
             try {
                 if (!jTextFieldNombre.getText().matches(regex) || jTextFieldNombre.getText().isBlank()) {
-                    JOptionPane.showMessageDialog(this, "Asegúrese de ingresar datos correctos en el campo de 'Nombre'.");
+                    JOptionPane.showMessageDialog(this, "Asegurese de ingresar datos correctos en el campo de 'Nombre'.");
                     return;
                 } else if (!jTextFieldApellido.getText().matches(regex) || jTextFieldApellido.getText().isBlank()) {
-                    JOptionPane.showMessageDialog(this, "Asegúrese de ingresar datos correctos en el campo de 'Apellido'.");
+                    JOptionPane.showMessageDialog(this, "Asegurese de ingresar datos correctos en el campo de 'Apellido'.");
                     return;
-                } else if (jTextFieldDNI.getText().matches(regex) || jTextFieldDNI.getText().isBlank()) {
-                    JOptionPane.showMessageDialog(this, "Asegúrese de ingresar datos correctos en el campo de 'DNI'.");
+                } else if (!jTextFieldDNI.getText().matches(regex2) || jTextFieldDNI.getText().isBlank()) {
+                    JOptionPane.showMessageDialog(this, "Asegurese de ingresar datos correctos en el campo de 'DNI'.");
                     return;
                 } else if (jDateChooserFN.getDate() == null) {
-                    JOptionPane.showMessageDialog(this, "Asegúrese escoger una fecha para el campo de 'Fecha de nacimiento'.");
+                    JOptionPane.showMessageDialog(this, "Asegurese escoger una fecha para el campo de 'Fecha de nacimiento'.");
                     return;
                 }
-                String dniRef = null;
-                int dniParse = 0;
+                String dniReferencia = null;
+                int dniParseado = 0;
+                boolean res = false;
+
                 do {
                     try {
-                    dniRef = JOptionPane.showInputDialog(this, "Ingrese el DNI de referencia al alumno que desea cambiarle sus datos.");
-                    if (dniRef == null) {
-                        return;
+                        dniReferencia = JOptionPane.showInputDialog(this, "Ingrese el DNI de referencia al alumno que desea cambiarle sus datos.");
+                        if (dniReferencia == null) {
+                            return;
+                        }
+                        if (!dniReferencia.matches(regex2) || dniReferencia.isBlank()) {
+                            JOptionPane.showMessageDialog(this, "Asegurese de ingresar un DNI válido.");
+                        } else {
+                            dniParseado = Integer.parseInt(dniReferencia);
+                            res = DbAlumno.actualizarAlumno(Integer.parseInt(jTextFieldDNI.getText()), jTextFieldNombre.getText(), jTextFieldApellido.getText(), jDateChooserFN.getDate(), dniParseado);
+                        }
+                    } catch (NumberFormatException | NullPointerException e) {
+                        e.printStackTrace();
                     }
-                    if (dniRef.matches(regex) || dniRef.isBlank()) {
-                        JOptionPane.showMessageDialog(this, "Asegúrese de ingresar un DNI válido.");
-
-                    } else {
-                        dniParse = Integer.parseInt(dniRef);
-                    }
-                    } catch (NumberFormatException nfe) {
-                        JOptionPane.showMessageDialog(this, "Asegúrese de ingresar un DNI válido.");
-                        nfe.printStackTrace();
-                    }
-                } while (dniRef.matches(regex) || dniRef.isBlank());
-                
-                boolean aux2actu = false;
-                do {
-                    aux2actu = DbAlumno.actualizarAlumno(Integer.parseInt(jTextFieldDNI.getText()), jTextFieldNombre.getText(), jTextFieldApellido.getText(), jDateChooserFN.getDate(), dniParse);
-                    if (aux2actu == false) {
-                        dniRef = JOptionPane.showInputDialog(this, "Ingrese el DNI de referencia al alumno que desea cambiarle sus datos.");
-                    }
-                    if (dniRef == null) {
-                        return;
-                    }
-                } while (aux2actu == false);
+                } while (res == false);
                 aux = false;
                 limpiarCampos();
                 deshabilitarCampos();

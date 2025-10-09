@@ -90,7 +90,7 @@ public class AlumnoData {
                 JOptionPane.showMessageDialog(null, "Alumno actualizado exitosamente.");
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "No existe un alumno con ese DNI.");
+                JOptionPane.showMessageDialog(null, "El DNI ingresado no apunta a ningun alumno. Intentelo nuevamente.");
                 return false;
             }
         } catch (SQLException s) {
