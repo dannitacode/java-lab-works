@@ -214,6 +214,9 @@
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -224,6 +227,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cargar materia"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCargarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonActualizar">
       <Properties>

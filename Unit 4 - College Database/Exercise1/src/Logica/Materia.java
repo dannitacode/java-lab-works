@@ -11,10 +11,10 @@ public class Materia {
     private int año;
     private boolean estado;
 
-    public Materia(String nombre, int año, boolean estado) {
+    public Materia(String nombre, int año) {
         this.nombre = nombre;
         this.año = año;
-        this.estado = estado;
+        this.estado = false;
     }
 
     public int getId() {

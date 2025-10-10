@@ -4,11 +4,19 @@
  */
 package IGU;
 
+import static IGU.JFrameMain.DbMateria;
+import Logica.Materia;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dannita
  */
 public class JIFMateria extends javax.swing.JInternalFrame {
+
+    private boolean aux = false;
+    private String regex = "[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$";
+    private String regex2 = "\\d+";
 
     /**
      * Creates new form JInternalFrameMateria
@@ -103,6 +111,11 @@ public class JIFMateria extends javax.swing.JInternalFrame {
 
         jButtonCargar.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jButtonCargar.setText("Cargar materia");
+        jButtonCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCargarActionPerformed(evt);
+            }
+        });
 
         jButtonActualizar.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jButtonActualizar.setText("Actualizar materia");
@@ -213,7 +226,30 @@ public class JIFMateria extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void jButtonCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCargarActionPerformed
+        if (aux == false) {
+            habilitarCampos();
+            deshabilitarBotones();
+            jButtonCargar.setEnabled(true);
+            jButtonCancelar.setEnabled(true);
+            aux = true;
+            return;
+        }
+        if (aux == true) {
+                if (!jTextFieldNombre.getText().matches(regex) || jTextFieldNombre.getText().isBlank()) {
+                    JOptionPane.showMessageDialog(this, "Asegurese de ingresar datos correctos en el campo de 'Nombre'.");
+                    return;
+                } else {
+                    DbMateria.ingresarMateria(new Materia(jTextFieldNombre.getText(), jYearChooserAño.getYear()));
+                }
+                aux = false;
+                limpiarCampos();
+                deshabilitarCampos();
+                habilitarBotones();
+                jButtonCancelar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jButtonCargarActionPerformed
+
     private void deshabilitarCampos() {
         jTextFieldIDMateria.setEnabled(false);
         jTextFieldNombre.setEnabled(false);

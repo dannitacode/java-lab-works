@@ -5,6 +5,7 @@
 package IGU;
 
 import Persistencia.AlumnoData;
+import Persistencia.MateriaData;
 
 /**
  *
@@ -12,12 +13,14 @@ import Persistencia.AlumnoData;
  */
 public class JFrameMain extends javax.swing.JFrame {
     public static AlumnoData DbAlumno;
+    public static MateriaData DbMateria;
     /**
      * Creates new form JFrameMain
      */
     public JFrameMain() {
         initComponents();
         DbAlumno = new AlumnoData(); 
+        DbMateria = new MateriaData();
     }
 
     /**
