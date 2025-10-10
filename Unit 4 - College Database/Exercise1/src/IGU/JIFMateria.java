@@ -119,6 +119,11 @@ public class JIFMateria extends javax.swing.JInternalFrame {
 
         jButtonActualizar.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jButtonActualizar.setText("Actualizar materia");
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarActionPerformed(evt);
+            }
+        });
 
         jButtonBorrar.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jButtonBorrar.setText("Borrar materia");
@@ -249,6 +254,47 @@ public class JIFMateria extends javax.swing.JInternalFrame {
                 jButtonCancelar.setEnabled(false);
         }
     }//GEN-LAST:event_jButtonCargarActionPerformed
+
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        if (aux == false) {
+            habilitarCampos();
+            jTextFieldIDMateria.setEnabled(true);
+            deshabilitarBotones();
+            jButtonActualizar.setEnabled(true);
+            jButtonCancelar.setEnabled(true);
+            aux = true;
+            return;
+        }
+        if (aux == true) {
+            if (!jTextFieldNombre.getText().matches(regex) || jTextFieldNombre.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Asegurese de ingresar datos correctos en el campo de 'Nombre'.");
+                return;
+            }
+            String idref = null;
+            int idpars = 0;
+            boolean res = false;
+            do {
+                idref = jTextFieldIDMateria.getText();
+                if (!idref.matches(regex2) || idref.isBlank()) {
+                    JOptionPane.showMessageDialog(this, "Ingrese un DNI valido.");
+                    return;
+                } else {
+                    idpars = Integer.parseInt(idref);
+                    res = DbMateria.actualizarMateria(jTextFieldNombre.getText(), jYearChooserAño.getYear(), idpars);
+                    if (res == true) {
+                        aux = false;
+                        limpiarCampos();
+                        deshabilitarCampos();
+                        jButtonCancelar.setEnabled(false);
+                        habilitarBotones();
+                    } else {
+                        jTextFieldIDMateria.setText("");
+                        return;
+                    }
+                }
+            } while (res == false);
+        }
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void deshabilitarCampos() {
         jTextFieldIDMateria.setEnabled(false);

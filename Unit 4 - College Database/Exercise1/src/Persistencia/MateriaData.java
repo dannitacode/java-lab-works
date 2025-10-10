@@ -66,34 +66,38 @@ public class MateriaData {
 //        }
 //    }
 //
-//    public void actualizarMateria(int id, int año) {
-//        Connection conexion = null;
-//        try {
-//            conexion = DbConexion.establecerConexion();
-//            String query = "UPDATE materia SET año=? WHERE id=?";
-//            PreparedStatement ps = conexion.prepareStatement(query);
-//            ps.setInt(1, año);
-//            ps.setInt(2, id);
-//            int filas = ps.executeUpdate();
-//            if (filas > 0) {
-//                System.out.println("Materia actualizada exitosamente.");
-//            } else {
-//                System.out.println("No existe esa materia con ese ID.");
-//            }
-//        } catch (SQLException s) {
-//            System.out.println("Error: No se pudo realizar la consulta.");
-//            s.printStackTrace();
-//        } finally {
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException s) {
-//                    s.printStackTrace();
-//                }
-//            }
-//        }
-//    }
-//
+    public boolean actualizarMateria(String nombre, int año, int id) {
+        Connection conexion = null;
+        try {
+            conexion = DbConexion.establecerConexion();
+            String query = "UPDATE materia SET nombre=?, año=? WHERE id_materia=?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, nombre);
+            ps.setInt(2, año);
+            ps.setInt(3, id);
+            int filas = ps.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Materia actualizada exitosamente.");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe esa materia con ese ID.");
+                return false;
+            }
+        } catch (SQLException s) {
+            JOptionPane.showMessageDialog(null, "Error: No se pudo realizar la consulta.");
+            s.printStackTrace();
+            return false;
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException s) {
+                    s.printStackTrace();
+                }
+            }
+        }
+    }
+
 //    public void buscarMateria(int id) {
 //        Connection conexion = null;
 //        try {
