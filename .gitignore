@@ -11,6 +11,17 @@
 build/
 dist/
 
+# Configuraciones privadas de NetBeans
+**/nbproject/private/
+**/nbproject/private/*
+**/build/
+**/dist/
+
+# Archivos de NetBeans generados automáticamente
+**/nbproject/private/config.properties
+**/nbproject/private/private.properties
+**/nbproject/private/private.xml
+
 # Configuración privada de NetBeans
 nbproject/private/
 
