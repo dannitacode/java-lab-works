@@ -127,6 +127,11 @@ public class JIFMateria extends javax.swing.JInternalFrame {
 
         jButtonBorrar.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jButtonBorrar.setText("Borrar materia");
+        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarActionPerformed(evt);
+            }
+        });
 
         jButtonAlta.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jButtonAlta.setText("Habilitar materia");
@@ -263,6 +268,7 @@ public class JIFMateria extends javax.swing.JInternalFrame {
             jButtonActualizar.setEnabled(true);
             jButtonCancelar.setEnabled(true);
             aux = true;
+            JOptionPane.showMessageDialog(this, "Debe ingresar el ID de referencia de la materia para proceder a su actualizacion.");
             return;
         }
         if (aux == true) {
@@ -274,27 +280,66 @@ public class JIFMateria extends javax.swing.JInternalFrame {
             int idpars = 0;
             boolean res = false;
             do {
-                idref = jTextFieldIDMateria.getText();
-                if (!idref.matches(regex2) || idref.isBlank()) {
-                    JOptionPane.showMessageDialog(this, "Ingrese un DNI valido.");
-                    return;
-                } else {
-                    idpars = Integer.parseInt(idref);
-                    res = DbMateria.actualizarMateria(jTextFieldNombre.getText(), jYearChooserAño.getYear(), idpars);
-                    if (res == true) {
-                        aux = false;
-                        limpiarCampos();
-                        deshabilitarCampos();
-                        jButtonCancelar.setEnabled(false);
-                        habilitarBotones();
-                    } else {
-                        jTextFieldIDMateria.setText("");
+                try {
+                    idref = jTextFieldIDMateria.getText();
+                    if (!idref.matches(regex2) || idref.isBlank()) {
+                        JOptionPane.showMessageDialog(this, "Ingrese un DNI valido.");
                         return;
+                    } else {
+                        idpars = Integer.parseInt(idref);
+                        res = DbMateria.actualizarMateria(jTextFieldNombre.getText(), jYearChooserAño.getYear(), idpars);
+                        if (res == true) {
+                            aux = false;
+                            limpiarCampos();
+                            deshabilitarCampos();
+                            jButtonCancelar.setEnabled(false);
+                            habilitarBotones();
+                        } else {
+                            jTextFieldIDMateria.setText("");
+                            return;
+                        }
                     }
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
                 }
             } while (res == false);
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
+
+    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
+        if (aux == false) {
+            deshabilitarBotones();
+            jTextFieldIDMateria.setEnabled(true);
+            jButtonBorrar.setEnabled(true);
+            jButtonCancelar.setEnabled(true);
+            aux = true;
+            JOptionPane.showMessageDialog(this, "Debe ingresar el ID de referencia de la materia para borrarla. \nOjo pillo, esto no se puede revertir.");
+            return;
+        }
+        if (aux == true) {
+            boolean res = false;
+            if (!jTextFieldIDMateria.getText().matches(regex2) || jTextFieldIDMateria.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Asegurese de ingresar datos correctos en el campo del ID de la materia.");
+                jTextFieldIDMateria.setText("");
+                return;
+            }
+            try {
+                res = DbMateria.borrarMateria(Integer.parseInt(jTextFieldIDMateria.getText()));
+            } catch (NumberFormatException nfe) {
+                nfe.printStackTrace();
+            }
+            if (res == true) {
+                aux = false;
+                limpiarCampos();
+                deshabilitarCampos();
+                jButtonCancelar.setEnabled(false);
+                habilitarBotones();
+            } else {
+                jTextFieldIDMateria.setText("");
+            }
+
+        }
+    }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     private void deshabilitarCampos() {
         jTextFieldIDMateria.setEnabled(false);
