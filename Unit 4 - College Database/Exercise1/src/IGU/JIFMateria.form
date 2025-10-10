@@ -260,6 +260,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Habilitar materia"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAltaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonBaja">
       <Properties>
@@ -268,12 +271,18 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Inhabilitar materia"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBajaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCancelar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelarActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -308,11 +317,17 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldBuscarPorA&#xf1;o">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldBuscarPorA&#xf1;oKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonActualizarLista">
       <Properties>
         <Property name="text" type="java.lang.String" value="Actualizar lista"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonActualizarListaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -2,6 +2,8 @@ package Persistencia;
 
 import Logica.Materia;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,35 +39,38 @@ public class MateriaData {
         }
     }
 
-//    public void mostrarMateria() {
-//        Connection conexion = null;
-//        try {
-//            conexion = DbConexion.establecerConexion();
-//            String query = "SELECT * FROM materia";
-//            PreparedStatement ps = conexion.prepareStatement(query);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                Materia materia = new Materia(
-//                        rs.getString("nombre"),
-//                        rs.getInt("año")
-//                );
-//                materia.setEstado(rs.getBoolean("estado"));
-//                materia.setId(rs.getInt("id_materia"));
-//            }
-//        } catch (SQLException s) {
-//            System.out.println("Error: No se pudo procesar la consulta.");
-//            s.printStackTrace();
-//        } finally {
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException s) {
-//                    s.printStackTrace();
-//                }
-//            }
-//        }
-//    }
-//
+    public List<Materia> mostrarMateria() {
+        Connection conexion = null;
+        List<Materia> listaMaterias = new ArrayList<>();
+        try {
+            conexion = DbConexion.establecerConexion();
+            String query = "SELECT * FROM materia";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Materia materia = new Materia(
+                        rs.getString("nombre"),
+                        rs.getInt("año")
+                );
+                materia.setEstado(rs.getBoolean("estado"));
+                materia.setId(rs.getInt("id_materia"));
+                listaMaterias.add(materia);
+            }
+        } catch (SQLException s) {
+            System.out.println("Error: No se pudo procesar la consulta.");
+            s.printStackTrace();
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException s) {
+                    s.printStackTrace();
+                }
+            }
+        }
+        return listaMaterias;
+    }
+
     public boolean actualizarMateria(String nombre, int año, int id) {
         Connection conexion = null;
         try {
@@ -98,93 +103,66 @@ public class MateriaData {
         }
     }
 
-//    public void buscarMateria(int id) {
-//        Connection conexion = null;
-//        try {
-//            conexion = DbConexion.establecerConexion();
-//            String query = "SELECT * FROM materia WHERE id=?";
-//            PreparedStatement ps = conexion.prepareStatement(query);
-//            ps.setInt(1, id);
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next()) {
-//                Materia materia = new Materia(
-//                        rs.getString("nombre"),
-//                        rs.getInt("año")
-//                );
-//                materia.setEstado(rs.getBoolean("estado"));
-//                materia.setId(rs.getInt("id_materia"));
-//                System.out.println("Materia encontrada.");
-//            } else {
-//                System.out.println("La materia con ese ID no fue encontrada.");
-//            }
-//        } catch (SQLException s) {
-//            System.out.println("Error: No se pudo realizar la consulta.");
-//            s.printStackTrace();
-//        } finally {
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException s) {
-//                    s.printStackTrace();
-//                }
-//            }
-//        }
-//    }
-//
-//    public void bajaLogica(int id) {
-//        Connection conexion = null;
-//        try {
-//            conexion = DbConexion.establecerConexion();
-//            String query = "UPDATE materia SET estado=0 WHERE id=?";
-//            PreparedStatement ps = conexion.prepareStatement(query);
-//            ps.setInt(1, id);
-//            int filas = ps.executeUpdate();
-//            if (filas > 0) {
-//                System.out.println("Materia dada de baja exitosamente");
-//            } else {
-//                System.out.println("No existe una materia con ese ID.");
-//            }
-//        } catch (SQLException s) {
-//            System.out.println("No se pudo procesar la consulta.");
-//            s.printStackTrace();
-//        } finally {
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException s) {
-//                    s.printStackTrace();
-//                }
-//            }
-//        }
-//    }
-//
-//    public void altaLogica(int id) {
-//        Connection conexion = null;
-//        try {
-//            conexion = DbConexion.establecerConexion();
-//            String query = "UPDATE materia SET estado=1 WHERE id=?";
-//            PreparedStatement ps = conexion.prepareStatement(query);
-//            ps.setInt(1, id);
-//            int filas = ps.executeUpdate();
-//            if (filas > 0) {
-//                System.out.println("Materia dada de alta exitosamente");
-//            } else {
-//                System.out.println("No existe una materia con ese ID.");
-//            }
-//        } catch (SQLException s) {
-//            System.out.println("No se pudo procesar la consulta.");
-//            s.printStackTrace();
-//        } finally {
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException s) {
-//                    s.printStackTrace();
-//                }
-//            }
-//        }
-//    }
-//
+    public boolean bajaLogica(int id) {
+        Connection conexion = null;
+        try {
+            conexion = DbConexion.establecerConexion();
+            String query = "UPDATE materia SET estado=0 WHERE id_materia=?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setInt(1, id);
+            int filas = ps.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Materia dada de baja exitosamente");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe una materia con ese ID.");
+                return false;
+            }
+        } catch (SQLException s) {
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la consulta.");
+            s.printStackTrace();
+            return false;
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException s) {
+                    s.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public boolean altaLogica(int id) {
+        Connection conexion = null;
+        try {
+            conexion = DbConexion.establecerConexion();
+            String query = "UPDATE materia SET estado=1 WHERE id_materia=?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setInt(1, id);
+            int filas = ps.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Materia dada de alta exitosamente");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe una materia con ese ID.");
+                return false;
+            }
+        } catch (SQLException s) {
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la consulta.");
+            s.printStackTrace();
+            return false;
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException s) {
+                    s.printStackTrace();
+                }
+            }
+        }
+    }
+
     public boolean borrarMateria(int id) {
         Connection conexion = null;
         try {

@@ -6,7 +6,10 @@ package IGU;
 
 import static IGU.JFrameMain.DbMateria;
 import Logica.Materia;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,12 +20,19 @@ public class JIFMateria extends javax.swing.JInternalFrame {
     private boolean aux = false;
     private String regex = "[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$";
     private String regex2 = "\\d+";
-
+    DefaultTableModel modeloTabla = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            } 
+        };
     /**
      * Creates new form JInternalFrameMateria
      */
     public JIFMateria() {
         initComponents();
+        columns();
+        rows();
     }
 
     /**
@@ -135,12 +145,27 @@ public class JIFMateria extends javax.swing.JInternalFrame {
 
         jButtonAlta.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jButtonAlta.setText("Habilitar materia");
+        jButtonAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAltaActionPerformed(evt);
+            }
+        });
 
         jButtonBaja.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jButtonBaja.setText("Inhabilitar materia");
+        jButtonBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBajaActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.setEnabled(false);
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jTableMaterias.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jTableMaterias.setModel(new javax.swing.table.DefaultTableModel(
@@ -159,7 +184,18 @@ public class JIFMateria extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         jLabel6.setText("Buscar materia por año:");
 
+        jTextFieldBuscarPorAño.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldBuscarPorAñoKeyReleased(evt);
+            }
+        });
+
         jButtonActualizarLista.setText("Actualizar lista");
+        jButtonActualizarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarListaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -341,6 +377,94 @@ public class JIFMateria extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
+    private void jButtonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaActionPerformed
+        if (aux == false) {
+            deshabilitarBotones();
+            jTextFieldIDMateria.setEnabled(true);
+            jButtonAlta.setEnabled(true);
+            jButtonCancelar.setEnabled(true);
+            aux = true;
+            JOptionPane.showMessageDialog(this, "Debe ingresar el ID de referencia de la materia para darla de alta.");
+            return;
+        }
+        if (aux == true) {
+            boolean res = false;
+            if (!jTextFieldIDMateria.getText().matches(regex2) || jTextFieldIDMateria.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Asegurese de ingresar datos correctos en el campo del ID de la materia.");
+                jTextFieldIDMateria.setText("");
+                return;
+            }
+            try {
+                res = DbMateria.altaLogica(Integer.parseInt(jTextFieldIDMateria.getText()));
+            } catch (NumberFormatException nfe) {
+                nfe.printStackTrace();
+            }
+            if (res == true) {
+                aux = false;
+                limpiarCampos();
+                deshabilitarCampos();
+                jButtonCancelar.setEnabled(false);
+                habilitarBotones();
+            } else {
+                jTextFieldIDMateria.setText("");
+            }
+
+        }
+    }//GEN-LAST:event_jButtonAltaActionPerformed
+
+    private void jButtonBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaActionPerformed
+        if (aux == false) {
+            deshabilitarBotones();
+            jTextFieldIDMateria.setEnabled(true);
+            jButtonBaja.setEnabled(true);
+            jButtonCancelar.setEnabled(true);
+            aux = true;
+            JOptionPane.showMessageDialog(this, "Debe ingresar el ID de referencia de la materia para darla de baja.");
+            return;
+        }
+        if (aux == true) {
+            boolean res = false;
+            if (!jTextFieldIDMateria.getText().matches(regex2) || jTextFieldIDMateria.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Asegurese de ingresar datos correctos en el campo del ID de la materia.");
+                jTextFieldIDMateria.setText("");
+                return;
+            }
+            try {
+                res = DbMateria.bajaLogica(Integer.parseInt(jTextFieldIDMateria.getText()));
+            } catch (NumberFormatException nfe) {
+                nfe.printStackTrace();
+            }
+            if (res == true) {
+                aux = false;
+                limpiarCampos();
+                deshabilitarCampos();
+                jButtonCancelar.setEnabled(false);
+                habilitarBotones();
+            } else {
+                jTextFieldIDMateria.setText("");
+            }
+
+        }
+    }//GEN-LAST:event_jButtonBajaActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        limpiarCampos();
+        deshabilitarCampos();
+        habilitarBotones();
+        jButtonCancelar.setEnabled(false);
+        if (aux == true) {
+            aux = false;
+        }
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jTextFieldBuscarPorAñoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscarPorAñoKeyReleased
+        rows();
+    }//GEN-LAST:event_jTextFieldBuscarPorAñoKeyReleased
+
+    private void jButtonActualizarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarListaActionPerformed
+        rows();
+    }//GEN-LAST:event_jButtonActualizarListaActionPerformed
+
     private void deshabilitarCampos() {
         jTextFieldIDMateria.setEnabled(false);
         jTextFieldNombre.setEnabled(false);
@@ -372,6 +496,44 @@ public class JIFMateria extends javax.swing.JInternalFrame {
         jTextFieldNombre.setText("");
         jTextFieldIDMateria.setText("");
         jYearChooserAño.setYear(2025);
+    }
+    
+    private void columns() {
+        modeloTabla.addColumn("ID Materia");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Año");
+        modeloTabla.addColumn("Estado");
+        jTableMaterias.setModel(modeloTabla);
+    }
+    
+    private void rows() {
+        String año = jTextFieldBuscarPorAño.getText();
+        if (!año.matches(regex2) && !año.isBlank()) {
+            JOptionPane.showMessageDialog(this, "No ingrese letras en el año.");
+            jTextFieldBuscarPorAño.setText("");
+            return;
+        }
+        modeloTabla.setRowCount(0);
+        try {
+            List<Materia> listaMaterias = new ArrayList<>();
+            listaMaterias = DbMateria.mostrarMateria();
+            for (Materia lista : listaMaterias) {
+                String aux = String.valueOf(lista.getAño());
+                if (año.isBlank() || aux.contains(año)) {
+                    Object[] filas = {
+                        lista.getId(), lista.getNombre(), lista.getAño(), (lista.isEstado() ? "Activa" : "Inactiva")
+                    };
+                    modeloTabla.addRow(filas);
+                }
+            }
+        } catch (NullPointerException npe) {
+            JOptionPane.showMessageDialog(this, "No existe una conexion establecida a una base de datos. \nEstablezca la conexion primero, luego continue.");
+            npe.getMessage();
+            jTextFieldBuscarPorAño.setEnabled(false);
+            jButtonActualizarLista.setEnabled(false);
+            jTableMaterias.setEnabled(false);
+            deshabilitarBotones();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
