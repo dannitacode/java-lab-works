@@ -201,4 +201,40 @@ public class AlumnoData {
             }
         }
     }
+    
+    public Alumno buscarAlumno(int id) {
+        Alumno alumno = null;
+        Connection conexion = null;
+        String query = "SELECT * FROM alumno WHERE id_alumno=?";
+        try {
+            conexion = DbConexion.establecerConexion();
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                alumno = new Alumno(
+                        rs.getInt("dni"),
+                        rs.getString("nombre"),
+                        rs.getString("apellido"),
+                        rs.getDate("fecha_nacimiento")
+                );
+                alumno.setEstado(rs.getBoolean("estado"));
+                alumno.setIdAlumno(rs.getInt("id_alumno"));
+//                JOptionPane.showMessageDialog(null, "Alumno encontrado: " + alumno.getNombre() + " " + alumno.getApellido());
+            } else {
+//                JOptionPane.showMessageDialog(null, "No se encontro al alumno con el ID " + id);
+            }
+        } catch (SQLException s) {
+            s.getMessage();
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException s) {
+                    s.getMessage();
+                }
+            }
+        }
+        return alumno;
+    }
 }

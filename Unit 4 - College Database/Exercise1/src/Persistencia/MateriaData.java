@@ -191,5 +191,41 @@ public class MateriaData {
                 }
             }
         }
+    } 
+    
+    public Materia buscarMateria(int id) {
+        Materia materia = null;
+        Connection conexion = null;
+        String query = "SELECT * FROM materia WHERE id_materia=?";
+        try {
+            conexion = DbConexion.establecerConexion();
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                materia = new Materia(
+                        rs.getString("nombre"),
+                        rs.getInt("año")
+                );
+                materia.setEstado(rs.getBoolean("estado"));
+                materia.setId(rs.getInt("id_materia"));
+//                JOptionPane.showMessageDialog(null, "Materia encontrada: " + materia.getNombre() + " " + materia.getId());
+            } else {
+//                JOptionPane.showMessageDialog(null, "No se encontro a la materia con el ID " + id);
+            }
+        } catch (SQLException s) {
+            s.getMessage();
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException s) {
+                    s.getMessage();
+                }
+            }
+        }
+        return materia;
     }
+    
+    
 }
