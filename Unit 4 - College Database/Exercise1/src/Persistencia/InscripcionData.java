@@ -22,15 +22,14 @@ public class InscripcionData {
         this.materiaData = idMateria;
     }
     
-    public void inscribirAlumno(Alumno alumno, Materia materia, int nota) {
+    public void inscribirAlumno(Alumno alumno, Materia materia) {
         Connection conexion = null;
         try {
             conexion = DbConexion.establecerConexion();
-            String query = "INSERT INTO inscripcion (id_alumno, id_materia, nota) VALUES (?,?,?)";
+            String query = "INSERT INTO inscripcion (id_alumno, id_materia, nota) VALUES (?,?,0)";
             PreparedStatement ps = conexion.prepareStatement(query);
             ps.setInt(1, alumno.getIdAlumno());
             ps.setInt(2, materia.getId());
-            ps.setInt(3, nota);
             int filas = ps.executeUpdate();
             if (filas > 0) {
                 JOptionPane.showMessageDialog(null, "Alumno inscripto exitosamente.");

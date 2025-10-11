@@ -49,4 +49,8 @@ public class Materia {
         this.estado = estado;
     }
     
+    public String toString() {
+        return this.getNombre() + " | " + this.año;
+    }
+    
 }

@@ -4,8 +4,12 @@
  */
 package IGU;
 
+import Logica.Alumno;
+import Logica.Materia;
 import Persistencia.AlumnoData;
 import Persistencia.MateriaData;
+import Persistencia.InscripcionData;
+import java.util.List;
 
 /**
  *
@@ -14,6 +18,9 @@ import Persistencia.MateriaData;
 public class JFrameMain extends javax.swing.JFrame {
     public static AlumnoData DbAlumno;
     public static MateriaData DbMateria;
+    public static InscripcionData DbInscripcion;
+    public static List<Alumno> listaAlumnos;
+    public static List<Materia> listaMaterias;
     /**
      * Creates new form JFrameMain
      */
@@ -21,6 +28,9 @@ public class JFrameMain extends javax.swing.JFrame {
         initComponents();
         DbAlumno = new AlumnoData(); 
         DbMateria = new MateriaData();
+        DbInscripcion = new InscripcionData(DbAlumno, DbMateria);
+        listaAlumnos = DbAlumno.mostrarAlumnos();
+        listaMaterias = DbMateria.mostrarMateria();
     }
 
     /**
@@ -36,6 +46,8 @@ public class JFrameMain extends javax.swing.JFrame {
         jMenuItemGestionAlumnos = new javax.swing.JMenuItem();
         jMenuMaterias = new javax.swing.JMenu();
         jMenuItemGestionMaterias = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemGestionInscripciones = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +86,18 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuMaterias);
 
+        jMenu1.setText("Inscripciones");
+
+        jMenuItemGestionInscripciones.setText("Gestión de inscripciones");
+        jMenuItemGestionInscripciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGestionInscripcionesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemGestionInscripciones);
+
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,6 +133,16 @@ public class JFrameMain extends javax.swing.JFrame {
         Escritorio.moveToFront(vM);
         vM.setLocation(40, 20);
     }//GEN-LAST:event_jMenuItemGestionMateriasActionPerformed
+
+    private void jMenuItemGestionInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionInscripcionesActionPerformed
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        JIFInscripcion vI = new JIFInscripcion();
+        vI.setVisible(true);
+        Escritorio.add(vI);
+        Escritorio.moveToFront(vI);
+        vI.setLocation(40, 20);
+    }//GEN-LAST:event_jMenuItemGestionInscripcionesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,9 +181,11 @@ public class JFrameMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Escritorio;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenuAlumnos;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemGestionAlumnos;
+    private javax.swing.JMenuItem jMenuItemGestionInscripciones;
     private javax.swing.JMenuItem jMenuItemGestionMaterias;
     private javax.swing.JMenu jMenuMaterias;
     // End of variables declaration//GEN-END:variables
