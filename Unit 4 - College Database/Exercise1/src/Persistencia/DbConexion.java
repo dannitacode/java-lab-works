@@ -21,9 +21,9 @@ public class DbConexion {
             String pass = prop.getProperty("db.pass");
 
             conn = DriverManager.getConnection(url, user, pass);
-            System.out.println("Conexión exitosa a la base de datos.");
+            System.out.println("Conexion exitosa a la base de datos.");
         } catch (IOException e) {
-            System.out.println("No se encontró config.properties: " + e.getMessage());
+            System.out.println("No se encontro config.properties: " + e.getMessage());
         } catch (SQLException e) {
             System.out.println("Error al conectar: " + e.getMessage());
         }

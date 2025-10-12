@@ -62,15 +62,15 @@ public class AlumnoData {
                 alumno.setIdAlumno(rs.getInt("id_alumno"));
                 listaAlumnos.add(alumno);
             }
-        } catch (SQLException s) {
-            System.out.println("Error: No se pudo procesar la consulta.");
-            s.printStackTrace();
+        } catch (SQLException | NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Error: No se pudo procesar la consulta.");
+            ex.getMessage();
         } finally {
             if (conexion != null) {
                 try {
                     conexion.close();
                 } catch (SQLException s) {
-                    s.printStackTrace();
+                    s.getMessage();
                 }
             }
         }

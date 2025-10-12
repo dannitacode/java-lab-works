@@ -24,7 +24,7 @@ public class JIFInscripcion extends javax.swing.JInternalFrame {
         initComponents();
         cargarAlumnos();
         cargarMaterias();
-        
+        inscripciones();
         jRadioButtonMateriasInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inscripciones();
@@ -55,6 +55,8 @@ public class JIFInscripcion extends javax.swing.JInternalFrame {
         jButtonInscribir = new javax.swing.JButton();
         jButtonAnularInscripcion = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+
+        setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         jLabel1.setText("Alumno:");
@@ -154,6 +156,10 @@ public class JIFInscripcion extends javax.swing.JInternalFrame {
         Alumno alumnoSel = (Alumno) jComboBoxAlumno.getSelectedItem();
         Materia materiaSel = (Materia) jComboBoxMaterias.getSelectedItem();
         List<Inscripcion> listaInscripciones = DbInscripcion.listaInscripciones();
+        if (materiaSel == null) {
+            JOptionPane.showMessageDialog(null, "Seleccione primero una opcion para ver las materias \nantes de continuar.");
+            return;
+        }
         boolean aux = false;
         for (Inscripcion inscripciones : listaInscripciones) {
             if (inscripciones.getAlumno().getIdAlumno() == alumnoSel.getIdAlumno() && inscripciones.getMateria().getId() == materiaSel.getId()) {
@@ -173,6 +179,10 @@ public class JIFInscripcion extends javax.swing.JInternalFrame {
         Materia materiaSel = (Materia) jComboBoxMaterias.getSelectedItem();
         List<Inscripcion> listaInscripciones = DbInscripcion.listaInscripciones();
         boolean aux = false;
+        if (materiaSel == null) {
+            JOptionPane.showMessageDialog(null, "Seleccione primero una opcion para ver las materias \nantes de continuar.");
+            return;
+        }
         int idIns = 0;
         for (Inscripcion inscripciones : listaInscripciones) {
             if (inscripciones.getAlumno().getIdAlumno() == alumnoSel.getIdAlumno() && inscripciones.getMateria().getId() == materiaSel.getId()) {

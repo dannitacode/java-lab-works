@@ -56,9 +56,9 @@ public class MateriaData {
                 materia.setId(rs.getInt("id_materia"));
                 listaMaterias.add(materia);
             }
-        } catch (SQLException s) {
-            System.out.println("Error: No se pudo procesar la consulta.");
-            s.printStackTrace();
+        } catch (SQLException | NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Error: No se pudo procesar la consulta.");
+            ex.getMessage();
         } finally {
             if (conexion != null) {
                 try {

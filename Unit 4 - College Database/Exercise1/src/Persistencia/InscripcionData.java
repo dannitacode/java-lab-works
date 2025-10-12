@@ -36,9 +36,9 @@ public class InscripcionData {
             } else {
                 JOptionPane.showMessageDialog(null, "Los valores son incorrectos. No se pudo ejecutar la inscripcion.");
             }
-        } catch (SQLException s) {
+        } catch (SQLException | NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "No se pudo procesar la consulta.");
-            s.getMessage();
+            ex.getMessage();
         } finally {
             if (conexion != null) {
                 try {
@@ -102,9 +102,9 @@ public class InscripcionData {
                 inscripcion.setId(rs.getInt("id_inscripto"));
                 listaInscriptos.add(inscripcion);
             }            
-        } catch (SQLException s) {
+        } catch (SQLException | NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "No se pudo procesar la consulta.");
-            s.getMessage();
+            ex.getMessage();
         } finally {
             if (conexion != null) {
                 try {

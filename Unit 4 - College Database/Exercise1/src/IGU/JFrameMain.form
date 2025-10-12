@@ -41,10 +41,18 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemGestionInscripciones">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de inscripciones"/>
+                <Property name="text" type="java.lang.String" value="Inscribir/desinscribir"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemGestionInscripcionesActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemNotas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cargar notas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemNotasActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

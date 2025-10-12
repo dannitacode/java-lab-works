@@ -4,17 +4,44 @@
  */
 package IGU;
 
+import Logica.Alumno;
+import Logica.Inscripcion;
+import static IGU.JFrameMain.DbInscripcion;
+import Persistencia.InscripcionData;
+import java.awt.event.ItemEvent;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author dannita
  */
 public class JIFCargarNotas extends javax.swing.JInternalFrame {
-
+    private String regex2 = "\\d+";
+    public DefaultTableModel modeloTabla = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
     /**
      * Creates new form JIFCargarNotas
      */
     public JIFCargarNotas() {
         initComponents();
+        cargarAlumnos();
+        columns();
+        rows();
+        
+        jComboBoxAlumnos.addItemListener(new java.awt.event.ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    rows();
+                }
+            }
+        });
+        
     }
 
     /**
@@ -24,16 +51,18 @@ public class JIFCargarNotas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxAlumnos = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jTableAlumnos = new javax.swing.JTable();
+        jButtonActualizarNota = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldNota = new javax.swing.JTextField();
 
         setClosable(true);
 
-        jComboBox1.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        jComboBoxAlumnos.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel3.setText("Carga de notas");
@@ -41,8 +70,8 @@ public class JIFCargarNotas extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         jLabel1.setText("Alumno:");
 
-        jTable1.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAlumnos.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        jTableAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,14 +82,17 @@ public class JIFCargarNotas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableAlumnos);
 
-        jButton1.setText("Actualizar nota");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonActualizarNota.setText("Actualizar nota");
+        jButtonActualizarNota.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonActualizarNotaActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        jLabel2.setText("Nueva nota:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,16 +108,21 @@ public class JIFCargarNotas extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBoxAlumnos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(31, 31, 31))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(180, 180, 180)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonActualizarNota))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldNota, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -95,29 +132,84 @@ public class JIFCargarNotas extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addComponent(jButtonActualizarNota)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonActualizarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarNotaActionPerformed
+        int filaSeleccionada = jTableAlumnos.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            int columnaIdIns = 0;
+            Integer idInscripto;
+            int nuevaNota = 0;
+            if (!jTextFieldNota.getText().matches(regex2) || jTextFieldNota.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Ingrese una nota valida.");
+                return;
+            } else {
+                idInscripto = (Integer) modeloTabla.getValueAt(filaSeleccionada, columnaIdIns);
+                try {
+                    nuevaNota = Integer.parseInt(jTextFieldNota.getText());
+                    DbInscripcion.cargarNotas(idInscripto, nuevaNota);
+                } catch (NumberFormatException e) {
+                    e.getMessage();
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una materia de la tabla antes de continuar.");
+            return;
+        }
+        rows();
+    }//GEN-LAST:event_jButtonActualizarNotaActionPerformed
 
-
+    private void cargarAlumnos() {
+        if (JFrameMain.listaAlumnos != null) {
+            for (Alumno alumnos : JFrameMain.listaAlumnos) {
+                jComboBoxAlumnos.addItem(alumnos);
+            }
+        }
+    }
+    
+    public void columns() {
+        modeloTabla.addColumn("ID inscripto");
+        modeloTabla.addColumn("ID alumno");
+        modeloTabla.addColumn("Materia");
+        modeloTabla.addColumn("Nota actual");
+        jTableAlumnos.setModel(modeloTabla);
+    }
+    
+    public void rows() {
+        modeloTabla.setRowCount(0);
+        Alumno alumnoSel = (Alumno) jComboBoxAlumnos.getSelectedItem();
+            for (Inscripcion inscripciones : DbInscripcion.listaInscripciones()) {
+                if (alumnoSel.getIdAlumno() == inscripciones.getAlumno().getIdAlumno()) {
+                    Object[] filas = {
+                        inscripciones.getId(), inscripciones.getAlumno().getIdAlumno(), inscripciones.getMateria().getNombre(), inscripciones.getNota()
+                    };
+                    modeloTabla.addRow(filas);
+                }
+            }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButtonActualizarNota;
+    private javax.swing.JComboBox<Alumno> jComboBoxAlumnos;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableAlumnos;
+    private javax.swing.JTextField jTextFieldNota;
     // End of variables declaration//GEN-END:variables
 }

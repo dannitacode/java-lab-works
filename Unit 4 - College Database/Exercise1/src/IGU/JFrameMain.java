@@ -48,6 +48,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jMenuItemGestionMaterias = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemGestionInscripciones = new javax.swing.JMenuItem();
+        jMenuItemNotas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,13 +89,21 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jMenu1.setText("Inscripciones");
 
-        jMenuItemGestionInscripciones.setText("Gestión de inscripciones");
+        jMenuItemGestionInscripciones.setText("Inscribir/desinscribir");
         jMenuItemGestionInscripciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemGestionInscripcionesActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItemGestionInscripciones);
+
+        jMenuItemNotas.setText("Cargar notas");
+        jMenuItemNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNotasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemNotas);
 
         jMenuBar1.add(jMenu1);
 
@@ -144,6 +153,16 @@ public class JFrameMain extends javax.swing.JFrame {
         vI.setLocation(40, 20);
     }//GEN-LAST:event_jMenuItemGestionInscripcionesActionPerformed
 
+    private void jMenuItemNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNotasActionPerformed
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        JIFCargarNotas vN = new JIFCargarNotas();
+        vN.setVisible(true);
+        Escritorio.add(vN);
+        Escritorio.moveToFront(vN);
+        vN.setLocation(40, 20);
+    }//GEN-LAST:event_jMenuItemNotasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -187,6 +206,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemGestionAlumnos;
     private javax.swing.JMenuItem jMenuItemGestionInscripciones;
     private javax.swing.JMenuItem jMenuItemGestionMaterias;
+    private javax.swing.JMenuItem jMenuItemNotas;
     private javax.swing.JMenu jMenuMaterias;
     // End of variables declaration//GEN-END:variables
 }
