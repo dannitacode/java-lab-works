@@ -49,6 +49,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItemGestionInscripciones = new javax.swing.JMenuItem();
         jMenuItemNotas = new javax.swing.JMenuItem();
+        jMenuItemListadoIns = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,6 +105,14 @@ public class JFrameMain extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItemNotas);
+
+        jMenuItemListadoIns.setText("Listado de inscripciones");
+        jMenuItemListadoIns.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListadoInsActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemListadoIns);
 
         jMenuBar1.add(jMenu1);
 
@@ -163,6 +172,16 @@ public class JFrameMain extends javax.swing.JFrame {
         vN.setLocation(40, 20);
     }//GEN-LAST:event_jMenuItemNotasActionPerformed
 
+    private void jMenuItemListadoInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListadoInsActionPerformed
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        JIFListaInscripciones vLI = new JIFListaInscripciones();
+        vLI.setVisible(true);
+        Escritorio.add(vLI);
+        Escritorio.moveToFront(vLI);
+        vLI.setLocation(40, 20);
+    }//GEN-LAST:event_jMenuItemListadoInsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -206,6 +225,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemGestionAlumnos;
     private javax.swing.JMenuItem jMenuItemGestionInscripciones;
     private javax.swing.JMenuItem jMenuItemGestionMaterias;
+    private javax.swing.JMenuItem jMenuItemListadoIns;
     private javax.swing.JMenuItem jMenuItemNotas;
     private javax.swing.JMenu jMenuMaterias;
     // End of variables declaration//GEN-END:variables
